@@ -11,6 +11,12 @@ O **Terê Verde Online** resolve esse desafio com um site responsivo e um painel
 
 ---
 
+## Equipe
+
+João Vitor de Almeida Oliveira
+
+---
+
 ## Funcionalidades principais
 
 ### Para visitantes
@@ -52,7 +58,3 @@ O **Terê Verde Online** resolve esse desafio com um site responsivo e um painel
 
 ## Alternativa rápida no Windows: 
 Na raiz do projeto existe o arquivo run.bat, que automatiza os passos básicos
-
-## Equipe
-
-João Vitor de Almeida Oliveira
