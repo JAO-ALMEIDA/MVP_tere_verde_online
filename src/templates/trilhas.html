@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% from "macros_public.html" import label_dificuldade, label_status, label_disponivel %}
+{% block title %}Trilhas — tere_verde_online{% endblock %}
+
+{% block content %}
+<section class="page-header">
+  <h1>Trilhas</h1>
+  <p>Percursos cadastrados, nível de dificuldade e informações para uma visita segura.</p>
+</section>
+
+{% if trilhas %}
+<ul class="public-list">
+  {% for t in trilhas %}
+  <li>
+    <article class="public-card">
+      <header class="public-card__head">
+        <h2 class="public-card__title">{{ t.nome }}</h2>
+        <div class="public-card__badges">
+          <span class="badge badge--disponivel {% if t.disponivel %}badge--disponivel-sim{% else %}badge--disponivel-nao{% endif %}">{{ label_disponivel(t.disponivel) }}</span>
+          <span class="badge badge--dificuldade badge--{{ t.dificuldade }}">{{ label_dificuldade(t.dificuldade) }}</span>
+          <span class="badge badge--status badge--status-{{ t.status }}">{{ label_status(t.status) }}</span>
+        </div>
+      </header>
+      <div class="public-card__body">
+        <p class="public-card__text">{{ t.descricao }}</p>
+      </div>
+    </article>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<div class="card card--empty">
+  <p>Ainda não há trilhas cadastradas. Volte em breve ou entre em contato com a equipe.</p>
+</div>
+{% endif %}
+{% endblock %}

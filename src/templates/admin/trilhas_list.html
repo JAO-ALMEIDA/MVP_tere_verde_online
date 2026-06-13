@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Trilhas (admin) — tere_verde_online{% endblock %}
+
+{% block content %}
+{% include "admin/_nav.html" %}
+
+<section class="page-header">
+  <h1>Trilhas</h1>
+  <p>Listagem e gestão de trilhas.</p>
+</section>
+
+<p class="admin-toolbar">
+  <a class="btn btn--primary" href="{{ url_for('admin.trilhas_nova') }}">Nova trilha</a>
+</p>
+
+<div class="card card--table">
+  {% if trilhas %}
+  <div class="table-wrap">
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Dificuldade</th>
+          <th>Status</th>
+          <th>Disponível</th>
+          <th class="admin-table__actions">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for t in trilhas %}
+        <tr>
+          <td>{{ t.nome }}</td>
+          <td>{{ t.dificuldade }}</td>
+          <td>{{ t.status }}</td>
+          <td>{% if t.disponivel %}Sim{% else %}Não{% endif %}</td>
+          <td class="admin-table__actions">
+            <a class="admin-table__link" href="{{ url_for('admin.trilhas_editar', trilha_id=t.id) }}">Editar</a>
+            <form class="admin-inline-form" method="post" action="{{ url_for('admin.trilhas_excluir', trilha_id=t.id) }}" onsubmit="return confirm('Excluir esta trilha?');">
+              <button type="submit" class="btn btn--danger btn--small">Excluir</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <p class="form-hint">Nenhuma trilha cadastrada. <a href="{{ url_for('admin.trilhas_nova') }}">Criar a primeira</a>.</p>
+  {% endif %}
+</div>
+{% endblock %}

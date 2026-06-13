@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}{% if item %}Editar biodiversidade{% else %}Nova biodiversidade{% endif %} — tere_verde_online{% endblock %}
+
+{% block content %}
+{% include "admin/_nav.html" %}
+
+<section class="page-header">
+  <h1>{% if item %}Editar registro{% else %}Novo registro{% endif %}</h1>
+  <p>Nome, tipo (ex.: flora, fauna) e descrição.</p>
+</section>
+
+<div class="card">
+  <form class="form-stack form-stack--wide" method="post" action="{% if item %}{{ url_for('admin.biodiversidade_editar', item_id=item.id) }}{% else %}{{ url_for('admin.biodiversidade_nova') }}{% endif %}">
+    <div class="form-group">
+      <label for="nome">Nome</label>
+      <input id="nome" name="nome" type="text" required value="{{ form_nome }}" maxlength="255">
+    </div>
+    <div class="form-group">
+      <label for="tipo">Tipo</label>
+      <input id="tipo" name="tipo" type="text" required value="{{ form_tipo }}" placeholder="Ex.: Flora, Fauna" maxlength="128">
+    </div>
+    <div class="form-group">
+      <label for="descricao">Descrição</label>
+      <textarea id="descricao" name="descricao" rows="5" required>{{ form_descricao }}</textarea>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn btn--primary">Salvar</button>
+      <a class="btn btn--secondary" href="{{ url_for('admin.biodiversidade_list') }}">Cancelar</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

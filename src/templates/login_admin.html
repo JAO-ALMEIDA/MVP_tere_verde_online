@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Login Admin — tere_verde_online{% endblock %}
+
+{% block content %}
+<section class="page-header">
+  <h1>Área administrativa</h1>
+  <p>Acesso restrito a pessoas autorizadas.</p>
+</section>
+
+<div class="card">
+  <h2>Entrar</h2>
+  <form class="form-stack" method="post" action="{{ url_for('admin.login') }}" autocomplete="off" aria-describedby="login-hint">
+    <input type="hidden" name="next" value="{{ next_url }}">
+    <p id="login-hint" class="form-hint">Use o usuário e a senha cadastrados no sistema.</p>
+    <div class="form-group">
+      <label for="admin-user">Usuário</label>
+      <input id="admin-user" name="username" type="text" inputmode="text" placeholder="Seu usuário" required>
+    </div>
+    <div class="form-group">
+      <label for="admin-pass">Senha</label>
+      <input id="admin-pass" name="password" type="password" placeholder="••••••••" required>
+    </div>
+    <button type="submit" class="btn btn--primary">Entrar</button>
+  </form>
+</div>
+{% endblock %}

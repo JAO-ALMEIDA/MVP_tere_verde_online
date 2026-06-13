@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Biodiversidade (admin) — tere_verde_online{% endblock %}
+
+{% block content %}
+{% include "admin/_nav.html" %}
+
+<section class="page-header">
+  <h1>Biodiversidade</h1>
+  <p>Listagem de espécies e tipos.</p>
+</section>
+
+<p class="admin-toolbar">
+  <a class="btn btn--primary" href="{{ url_for('admin.biodiversidade_nova') }}">Novo registro</a>
+</p>
+
+<div class="card card--table">
+  {% if itens %}
+  <div class="table-wrap">
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Tipo</th>
+          <th class="admin-table__desc">Descrição</th>
+          <th class="admin-table__actions">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for b in itens %}
+        <tr>
+          <td>{{ b.nome }}</td>
+          <td>{{ b.tipo }}</td>
+          <td class="admin-table__desc">{{ b.descricao[:80] }}{% if b.descricao|length > 80 %}…{% endif %}</td>
+          <td class="admin-table__actions">
+            <a class="admin-table__link" href="{{ url_for('admin.biodiversidade_editar', item_id=b.id) }}">Editar</a>
+            <form class="admin-inline-form" method="post" action="{{ url_for('admin.biodiversidade_excluir', item_id=b.id) }}" onsubmit="return confirm('Excluir este registro?');">
+              <button type="submit" class="btn btn--danger btn--small">Excluir</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <p class="form-hint">Nenhum registro. <a href="{{ url_for('admin.biodiversidade_nova') }}">Criar o primeiro</a>.</p>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% from "macros_public.html" import label_disponivel %}
+{% block title %}Eventos — tere_verde_online{% endblock %}
+
+{% block content %}
+<section class="page-header">
+  <h1>Eventos</h1>
+  <p>Oficinas, caminhadas e atividades — confira data, horário e vagas disponíveis.</p>
+</section>
+
+{% if eventos %}
+<ul class="public-list">
+  {% for e in eventos %}
+  <li>
+    <article class="public-card public-card--evento">
+      <header class="public-card__head public-card__head--evento">
+        <h2 class="public-card__title">{{ e.nome }}</h2>
+        <span class="badge badge--disponivel {% if e.disponivel %}badge--disponivel-sim{% else %}badge--disponivel-nao{% endif %}">{{ label_disponivel(e.disponivel) }}</span>
+      </header>
+      <div class="public-card__body public-card__body--evento">
+        <dl class="evento-meta">
+          <div class="evento-meta__row">
+            <dt>Data</dt>
+            <dd><time datetime="{{ e.data.isoformat() }}">{{ e.data.strftime('%d/%m/%Y') }}</time></dd>
+          </div>
+          <div class="evento-meta__row">
+            <dt>Horário</dt>
+            <dd><time>{{ e.horario.strftime('%H:%M') }}</time></dd>
+          </div>
+          <div class="evento-meta__row evento-meta__row--destaque">
+            <dt>Vagas</dt>
+            <dd>
+              <span class="evento-vagas" aria-label="Número de vagas">{{ e.disponibilidade }}</span>
+              <span class="evento-vagas__suffix">vagas</span>
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </article>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<div class="card card--empty">
+  <p>Nenhum evento na agenda no momento. Novidades serão publicadas aqui.</p>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Biodiversidade — tere_verde_online{% endblock %}
+
+{% block content %}
+<section class="page-header">
+  <h1>Biodiversidade</h1>
+  <p>Flora, fauna e outros registros da região.</p>
+</section>
+
+{% if itens %}
+<ul class="public-list public-list--bio">
+  {% for b in itens %}
+  <li>
+    <article class="public-card public-card--bio">
+      <header class="public-card__head public-card__head--bio">
+        <h2 class="public-card__title">{{ b.nome }}</h2>
+        <span class="badge badge--tipo">{{ b.tipo }}</span>
+      </header>
+      <div class="public-card__body">
+        <p class="public-card__text">{{ b.descricao }}</p>
+      </div>
+    </article>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<div class="card card--empty">
+  <p>Em breve haverá registros de biodiversidade por aqui.</p>
+</div>
+{% endif %}
+{% endblock %}

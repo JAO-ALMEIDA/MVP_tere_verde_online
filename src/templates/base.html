@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}TERE VERDE ONLINE{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+
+  <div class="page-wrap">
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="site-brand" href="{{ url_for('main.home') }}">TERE VERDE ONLINE</a>
+        <nav class="nav-main" aria-label="Principal">
+          <ul class="nav-main__list">
+            <li>
+              <a class="nav-main__link{% if active == 'home' %} is-active{% endif %}"
+                 href="{{ url_for('main.home') }}">Home</a>
+            </li>
+            <li>
+              <a class="nav-main__link{% if active == 'trilhas' %} is-active{% endif %}"
+                 href="{{ url_for('main.trilhas') }}">Trilhas</a>
+            </li>
+            <li>
+              <a class="nav-main__link{% if active == 'biodiversidade' %} is-active{% endif %}"
+                 href="{{ url_for('main.biodiversidade') }}">Biodiversidade</a>
+            </li>
+            <li>
+              <a class="nav-main__link{% if active == 'eventos' %} is-active{% endif %}"
+                 href="{{ url_for('main.eventos') }}">Eventos</a>
+            </li>
+            {% if admin_logged_in %}
+            <li>
+              <a class="nav-main__link nav-main__link--admin{% if active == 'admin' %} is-active{% endif %}"
+                 href="{{ url_for('admin.dashboard') }}">Painel</a>
+            </li>
+            <li>
+              <form class="nav-logout" method="post" action="{{ url_for('admin.logout') }}" aria-label="Encerrar sessão">
+                <button type="submit" class="nav-main__link nav-main__link--logout">Sair</button>
+              </form>
+            </li>
+            {% else %}
+            <li>
+              <a class="nav-main__link nav-main__link--admin{% if active == 'admin' %} is-active{% endif %}"
+                 href="{{ url_for('admin.login') }}">Login Admin</a>
+            </li>
+            {% endif %}
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="conteudo" class="main-content">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="flash-list" role="status">
+          {% for category, message in messages %}
+          <p class="flash flash--{{ category }}">{{ message }}</p>
+          {% endfor %}
+        </div>
+        {% endif %}
+      {% endwith %}
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+      <p>tere_verde_online — conexão com a natureza</p>
+    </footer>
+  </div>
+</body>
+</html>

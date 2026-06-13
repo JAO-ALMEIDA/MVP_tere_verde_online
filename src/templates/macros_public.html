@@ -1,0 +1,12 @@
+{# Rótulos amigáveis para dados do banco #}
+{% macro label_dificuldade(d) -%}
+  {%- if d == 'facil' -%}Fácil{%- elif d == 'moderado' -%}Moderado{%- elif d == 'dificil' -%}Difícil{%- else -%}{{ d }}{%- endif -%}
+{%- endmacro %}
+
+{% macro label_status(s) -%}
+  {%- if s == 'ativa' -%}Ativa{%- elif s == 'inativa' -%}Inativa{%- elif s == 'manutencao' -%}Manutenção{%- else -%}{{ s }}{%- endif -%}
+{%- endmacro %}
+
+{% macro label_disponivel(d) -%}
+  {%- if d -%}Disponível{%- else -%}Indisponível{%- endif -%}
+{%- endmacro %}

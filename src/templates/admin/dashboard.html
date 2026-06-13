@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Painel — tere_verde_online{% endblock %}
+
+{% block content %}
+{% include "admin/_nav.html" %}
+
+<section class="page-header">
+  <h1>Painel administrativo</h1>
+  <p>Olá, <strong>{{ admin_usuario }}</strong>. Gerencie o conteúdo do site.</p>
+</section>
+
+<div class="admin-dashboard-grid">
+  <div class="card">
+    <h2>Trilhas</h2>
+    <p>Criar, editar e remover trilhas ecológicas.</p>
+    <div class="admin-card-actions" role="group" aria-label="Ações de trilhas">
+      <a class="btn btn--primary" href="{{ url_for('admin.trilhas_list') }}">Ver lista</a>
+      <a class="btn btn--secondary" href="{{ url_for('admin.trilhas_nova') }}">Nova trilha</a>
+      <a class="btn btn--secondary" href="{{ url_for('main.trilhas') }}" target="_blank" rel="noopener noreferrer">Abrir página pública</a>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Eventos</h2>
+    <p>Agenda, horários e vagas.</p>
+    <div class="admin-card-actions" role="group" aria-label="Ações de eventos">
+      <a class="btn btn--primary" href="{{ url_for('admin.eventos_list') }}">Ver lista</a>
+      <a class="btn btn--secondary" href="{{ url_for('admin.eventos_novo') }}">Novo evento</a>
+      <a class="btn btn--secondary" href="{{ url_for('main.eventos') }}" target="_blank" rel="noopener noreferrer">Abrir página pública</a>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Biodiversidade</h2>
+    <p>Espécies e descrições.</p>
+    <div class="admin-card-actions" role="group" aria-label="Ações de biodiversidade">
+      <a class="btn btn--primary" href="{{ url_for('admin.biodiversidade_list') }}">Ver lista</a>
+      <a class="btn btn--secondary" href="{{ url_for('admin.biodiversidade_nova') }}">Novo registro</a>
+      <a class="btn btn--secondary" href="{{ url_for('main.biodiversidade') }}" target="_blank" rel="noopener noreferrer">Abrir página pública</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

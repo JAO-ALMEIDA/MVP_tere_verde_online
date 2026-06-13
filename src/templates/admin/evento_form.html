@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}{% if evento %}Editar evento{% else %}Novo evento{% endif %} — tere_verde_online{% endblock %}
+
+{% block content %}
+{% include "admin/_nav.html" %}
+
+<section class="page-header">
+  <h1>{% if evento %}Editar evento{% else %}Novo evento{% endif %}</h1>
+  <p>Data, horário, vagas e disponibilidade do evento no site.</p>
+</section>
+
+<div class="card">
+  <form class="form-stack form-stack--wide" method="post" action="{% if evento %}{{ url_for('admin.eventos_editar', evento_id=evento.id) }}{% else %}{{ url_for('admin.eventos_novo') }}{% endif %}">
+    <div class="form-group">
+      <label for="nome">Nome</label>
+      <input id="nome" name="nome" type="text" required value="{{ form_nome }}" maxlength="255">
+    </div>
+    <div class="form-group">
+      <label for="data">Data</label>
+      <input id="data" name="data" type="date" required value="{{ form_data }}">
+    </div>
+    <div class="form-group">
+      <label for="horario">Horário</label>
+      <input id="horario" name="horario" type="time" required value="{{ form_horario }}">
+    </div>
+    <div class="form-group">
+      <label for="disponibilidade">Vagas</label>
+      <input id="disponibilidade" name="disponibilidade" type="number" min="0" step="1" required value="{{ form_disponibilidade }}">
+    </div>
+    <div class="form-group form-group--checkbox">
+      <label class="form-checkbox">
+        <input type="checkbox" name="disponivel" value="1" {% if form_disponivel %}checked{% endif %}>
+        <span>Evento disponível</span>
+      </label>
+      <p class="form-hint">Data e horário acima. Desmarque para marcar o evento como indisponível no site.</p>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn btn--primary">Salvar</button>
+      <a class="btn btn--secondary" href="{{ url_for('admin.eventos_list') }}">Cancelar</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

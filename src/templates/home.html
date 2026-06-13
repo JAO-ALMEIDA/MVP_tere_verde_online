@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Home — tere_verde_online{% endblock %}
+
+{% block content %}
+<section class="page-header">
+  <h1>Bem-vindo</h1>
+  <p>Explore trilhas, biodiversidade e eventos do seu jeito, no celular ou no computador.</p>
+</section>
+
+<div class="home-sections">
+  <article class="card home-section">
+    <h2>Trilhas</h2>
+    <p>Percursos com nível de dificuldade, status e orientações para uma visita segura.</p>
+    <ul class="home-section__actions">
+      <li><a class="btn btn--primary" href="{{ url_for('main.trilhas') }}">Ver todas as trilhas</a></li>
+      <li><a class="home-section__extra" href="{{ url_for('main.eventos') }}">Combinar com eventos na natureza</a></li>
+      <li><a class="home-section__extra" href="{{ url_for('main.biodiversidade') }}">Conhecer a biodiversidade da região</a></li>
+    </ul>
+  </article>
+  <article class="card home-section">
+    <h2>Eventos</h2>
+    <p>Oficinas, caminhadas e atividades com data, horário e vagas.</p>
+    <ul class="home-section__actions">
+      <li><a class="btn btn--primary" href="{{ url_for('main.eventos') }}">Ver agenda de eventos</a></li>
+      <li><a class="home-section__extra" href="{{ url_for('main.trilhas') }}">Explorar trilhas para visitar</a></li>
+      <li><a class="home-section__extra" href="{{ url_for('main.biodiversidade') }}">Explorar espécies da região</a></li>
+    </ul>
+  </article>
+  <article class="card home-section">
+    <h2>Biodiversidade</h2>
+    <p>Espécies e curiosidades sobre a fauna e flora divulgadas no site.</p>
+    <ul class="home-section__actions">
+      <li><a class="btn btn--primary" href="{{ url_for('main.biodiversidade') }}">Ver espécies</a></li>
+      <li><a class="home-section__extra" href="{{ url_for('main.trilhas') }}">Onde observar — pelas trilhas</a></li>
+      <li><a class="home-section__extra" href="{{ url_for('main.eventos') }}">Atividades com educação ambiental</a></li>
+    </ul>
+  </article>
+</div>
+{% endblock %}
